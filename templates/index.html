@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockPredict | Market Insights</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-icon">↗</span>
+            <span>Stock<span class="green">Predict</span></span>
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+        </div>
+
+        <a href="#prediction" class="nav-button">Get Started</a>
+    </nav>
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="tag">
+                    <span class="dot"></span>
+                    SMART MARKET INSIGHTS
+                </div>
+
+                <h1>
+                    Stock Market<br>
+                    <span class="gradient-text">Prediction</span>
+                </h1>
+
+                <p class="hero-description">
+                    Explore the world of stock markets with our Python-powered
+                    prediction demo. Enter a stock symbol and discover your
+                    estimated result.
+                </p>
+
+                <div class="feature-badges">
+                    <span>✦ Fast Insights</span>
+                    <span>⌘ Python Powered</span>
+                    <span>↗ Simple Analysis</span>
+                </div>
+
+            </div>
+
+            <div class="hero-visual">
+
+                <div class="chart-card">
+
+                    <div class="chart-top">
+                        <div>
+                            <span class="chart-label">MARKET OVERVIEW</span>
+                            <h3>Market Trends</h3>
+                        </div>
+
+                        <span class="live-badge">
+                            <span class="dot"></span>
+                            DEMO
+                        </span>
+                    </div>
+
+                    <div class="chart">
+                        <svg viewBox="0 0 500 230"
+                             preserveAspectRatio="none"
+                             class="chart-svg">
+
+                            <defs>
+                                <linearGradient id="chartGradient"
+                                               x1="0" y1="0"
+                                               x2="0" y2="1">
+                                    <stop offset="0%"
+                                          stop-color="#10b981"
+                                          stop-opacity="0.35"/>
+                                    <stop offset="100%"
+                                          stop-color="#10b981"
+                                          stop-opacity="0"/>
+                                </linearGradient>
+                            </defs>
+
+                            <line x1="0" y1="40" x2="500" y2="40"
+                                  class="grid-line"/>
+                            <line x1="0" y1="100" x2="500" y2="100"
+                                  class="grid-line"/>
+                            <line x1="0" y1="160" x2="500" y2="160"
+                                  class="grid-line"/>
+                            <line x1="0" y1="220" x2="500" y2="220"
+                                  class="grid-line"/>
+
+                            <path
+                                d="M0 190 L40 165 L80 180 L120 120
+                                   L160 145 L200 100 L240 125 L280 70
+                                   L320 105 L360 55 L400 80 L440 35
+                                   L500 20 L500 230 L0 230 Z"
+                                fill="url(#chartGradient)"/>
+
+                            <path
+                                d="M0 190 L40 165 L80 180 L120 120
+                                   L160 145 L200 100 L240 125 L280 70
+                                   L320 105 L360 55 L400 80 L440 35
+                                   L500 20"
+                                fill="none"
+                                stroke="#10b981"
+                                stroke-width="4"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"/>
+
+                            <circle cx="440" cy="35" r="6"
+                                    fill="#10b981"/>
+                        </svg>
+                    </div>
+
+                    <div class="chart-footer">
+                        <span>Market visualization</span>
+                        <span class="green">↗ Trend illustration</span>
+                    </div>
+
+                </div>
+
+                <div class="floating-card floating-card-top">
+                    <span class="floating-icon">↗</span>
+                    <div>
+                        <small>Market Insights</small>
+                        <strong>Explore Trends</strong>
+                    </div>
+                </div>
+
+                <div class="floating-card floating-card-bottom">
+                    <span class="floating-icon">✦</span>
+                    <div>
+                        <small>Built with</small>
+                        <strong>Python & Flask</strong>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="prediction-section" id="prediction">
+
+            <div class="prediction-card">
+
+                <div class="section-heading">
+                    <div class="tag">
+                        <span class="dot"></span>
+                        TRY THE DEMO
+                    </div>
+
+                    <h2>Predict a <span class="green">Stock</span></h2>
+
+                    <p>
+                        Enter a company stock symbol to get a demo estimate.
+                    </p>
+                </div>
+
+                <form action="/predict" method="POST" class="prediction-form">
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">⌕</span>
+
+                        <input
+                            type="text"
+                            name="stock"
+                            placeholder="Enter stock symbol (e.g. AAPL)"
+                            autocomplete="off"
+                            required>
+
+                    </div>
+
+                    <button type="submit" class="predict-button">
+                        Predict Price
+                        <span>↗</span>
+                    </button>
+
+                </form>
+
+                <p class="input-hint">
+                    Examples: AAPL, TSLA, RELIANCE.NS, MSFT
+                </p>
+
+
+                {% if error %}
+
+                    <div class="error-box">
+                        <span>⚠</span>
+                        {{ error }}
+                    </div>
+
+                {% endif %}
+
+
+                {% if prediction is not none and prediction %}
+
+                    <div class="result-box">
+
+                        <div class="result-header">
+                            <div>
+                                <span class="result-label">
+                                    PREDICTION RESULT
+                                </span>
+
+                                <h3>{{ stock }}</h3>
+                            </div>
+
+                            <span class="result-badge">
+                                DEMO
+                            </span>
+                        </div>
+
+                        <div class="result-price">
+                            {{ prediction }}
+                        </div>
+
+                        <p class="result-message">
+                            {{ message }}
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+
+        <section class="features-section" id="features">
+
+            <div class="section-heading">
+
+                <div class="tag">
+                    <span class="dot"></span>
+                    OUR FEATURES
+                </div>
+
+                <h2>Designed for <span class="green">Simplicity</span></h2>
+
+                <p>
+                    A simple demonstration of a Python web application.
+                </p>
+
+            </div>
+
+
+            <div class="features-grid">
+
+                <div class="feature-card">
+                    <div class="feature-icon">⌘</div>
+                    <h3>Python Backend</h3>
+                    <p>
+                        Built using Python and Flask to process inputs
+                        and display results.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">↗</div>
+                    <h3>Market Insights</h3>
+                    <p>
+                        A stock-themed interface designed to demonstrate
+                        a prediction workflow.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">◈</div>
+                    <h3>Responsive Design</h3>
+                    <p>
+                        A clean interface designed to adapt to desktops,
+                        tablets and mobile devices.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="about-section" id="about">
+
+            <div class="about-card">
+                <span class="about-icon">ⓘ</span>
+
+                <div>
+                    <h3>About this project</h3>
+
+                    <p>
+                        StockPredict is an educational web application
+                        created to demonstrate a Python Flask website.
+                        The displayed estimate is generated using demo
+                        logic and is not based on real-time stock data
+                        or a trained machine learning model.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="footer">
+        <div class="logo">
+            <span class="logo-icon">↗</span>
+            <span>Stock<span class="green">Predict</span></span>
+        </div>
+
+        <p>
+            Built with Python & Flask | Educational Project
+        </p>
+
+        <p class="disclaimer">
+            This website is for educational purposes only.
+            Not financial advice.
+        </p>
+    </footer>
+
+</body>
+</html>
